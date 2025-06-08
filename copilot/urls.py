@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ask
+from .views import AskView
 
 urlpatterns = [
-    path("ask/", ask),
+    path("ask/", AskView.as_view(), name="copilot-ask"),
 ]
