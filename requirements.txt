@@ -1,6 +1,6 @@
 Django>=4.2
 openai
 python-dotenv
-
 djangorestframework
 drf-spectacular
+Pillow
