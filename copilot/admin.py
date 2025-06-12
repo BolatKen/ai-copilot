@@ -15,10 +15,11 @@ class ContentAdmin(admin.ModelAdmin):
 
 @admin.register(ModerationResult)
 class ModerationResultAdmin(admin.ModelAdmin):
-    list_display = ['content', 'analyzed_at', 'get_safety_status']
+    list_display = ['content', 'analyzed_at', 'get_safety_status', 'is_checked_by_moderator', 'moderator_tags']
     list_filter = ['analyzed_at', 'content__safety_status']
     filter_horizontal = ['detected_tags']
     readonly_fields = ['analyzed_at']
+    search_fields = ('moderator_tags',)
     
     def get_safety_status(self, obj):
         return obj.content.safety_status

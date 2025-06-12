@@ -4,3 +4,5 @@ python-dotenv
 djangorestframework
 drf-spectacular
 Pillow
+
+django-cors-headers

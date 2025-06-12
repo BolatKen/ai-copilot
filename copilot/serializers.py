@@ -27,5 +27,5 @@ class ModerationResultSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ModerationResult
-        fields = ['id', 'content', 'analyzed_at', 'detected_tags', 'ai_analysis_raw']
+        fields = '__all__'
 

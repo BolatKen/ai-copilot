@@ -9,4 +9,7 @@ urlpatterns = [
     path('content/<int:content_id>/warning/', views.get_submission_warning, name='get_submission_warning'),
     path('content/<int:content_id>/update-status/', views.update_content_status, name='update_content_status'),
     path('moderator/dashboard/', views.moderator_dashboard, name='moderator_dashboard'),
+    
+    path("unverified/", views.get_unverified_content),
+    path("moderation/<int:result_id>/verify/", views.mark_as_verified),
 ]

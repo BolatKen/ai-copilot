@@ -273,3 +273,44 @@ def get_submission_warning(request, content_id):
     except Content.DoesNotExist:
         return Response({'error': 'Контент не найден'}, status=status.HTTP_404_NOT_FOUND)
 
+
+
+from django.http import JsonResponse
+from .models import ModerationResult
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers import serialize
+from django.forms.models import model_to_dict
+
+
+
+@csrf_exempt
+def get_unverified_content(request):
+    results = ModerationResult.objects.filter(is_checked_by_moderator=False).select_related('content')
+    data = []
+    for result in results:
+        item = {
+            "id": result.content.id,
+            "file": result.content.file.url,
+            "file_type": result.content.file_type,
+            "uploaded_at": result.content.uploaded_at,
+            "safety_status": result.content.safety_status,
+            "moderation_result": {
+                "id": result.id,
+                "analyzed_at": result.analyzed_at,
+                "detected_tags": [tag.name for tag in result.detected_tags.all()],
+                "ai_analysis_raw": result.ai_analysis_raw,
+                "is_checked_by_moderator": result.is_checked_by_moderator,
+                "moderator_tags": result.moderator_tags or " "  # 👈 ДОБАВЬ ЭТО
+            }
+        }
+        data.append(item)
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+def mark_as_verified(request, result_id):
+    if request.method == 'POST':
+        result = ModerationResult.objects.get(pk=result_id)
+        result.is_checked_by_moderator = True
+        result.save()
+        return JsonResponse({'status': 'safe'})
