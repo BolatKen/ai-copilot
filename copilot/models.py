@@ -31,7 +31,8 @@ class ModerationResult(models.Model):
     analyzed_at = models.DateTimeField(auto_now_add=True)
     detected_tags = models.ManyToManyField(Tag, blank=True)
     ai_analysis_raw = models.TextField(blank=True, null=True)
-
+    is_checked_by_moderator = models.BooleanField(default=False)
+    
     def __str__(self):
         return f'Result for {self.content.file.name} - {self.content.safety_status}'
 

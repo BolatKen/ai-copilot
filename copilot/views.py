@@ -53,9 +53,11 @@ from django.core.files.base import ContentFile
 from .models import Content, Tag, ModerationResult
 from .serializers import ContentSerializer, ModerationResultSerializer
 from .services import ContentModerationService
+from django.views.decorators.csrf import csrf_exempt
 
 
 
+@csrf_exempt
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
 def upload_content(request):
