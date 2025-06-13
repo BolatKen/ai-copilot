@@ -314,3 +314,61 @@ def mark_as_verified(request, result_id):
         result.is_checked_by_moderator = True
         result.save()
         return JsonResponse({'status': 'safe'})
+    
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+@api_view(['POST'])
+def update_moderation_tags(request, content_id):
+    """
+    Обновляет теги и вердикт модератора
+    """
+    try:
+        content = Content.objects.get(id=content_id)
+        moderation_result = content.moderation_result
+
+        # Получаем данные
+        moderator_tags = request.data.get('moderator_tags', '')
+        moderator_verdict = request.data.get('moderator_verdict', '')
+
+        # Обновляем
+        moderation_result.moderator_tags = moderator_tags
+        moderation_result.moderator_verdict = moderator_verdict
+        moderation_result.save()
+
+        return Response({
+            'message': 'Теги и вердикт успешно обновлены.',
+            'moderation_result': {
+                'moderator_tags': moderation_result.moderator_tags,
+                'moderator_verdict': moderation_result.moderator_verdict,
+            }
+        })
+    except Content.DoesNotExist:
+        return Response({'error': 'Контент не найден'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+@api_view(['POST'])
+def moderator_finalize_review(request, content_id):
+    try:
+        content = Content.objects.get(id=content_id)
+        result = content.moderation_result
+
+        # Обновляем статус
+        status_val = request.data.get('safety_status')
+        if status_val not in ['safe', 'potentially_unsafe', 'unsafe']:
+            return Response({'error': 'Неверный статус'}, status=status.HTTP_400_BAD_REQUEST)
+        content.safety_status = status_val
+        content.save()
+
+        # Обновляем теги и вердикт
+        result.moderator_tags = request.data.get('moderator_tags', '')
+        result.moderator_verdict = request.data.get('moderator_verdict', '')
+        result.is_checked_by_moderator = True
+        result.save()
+
+        return Response({'message': 'Контент успешно модерирован.'})
+    except Content.DoesNotExist:
+        return Response({'error': 'Контент не найден'}, status=status.HTTP_404_NOT_FOUND)

@@ -34,6 +34,7 @@ class ModerationResult(models.Model):
     is_checked_by_moderator = models.BooleanField(default=False)
      # 🔽 Добавляем это поле
     moderator_tags = models.TextField(blank=True, default='')
+    moderator_verdict = models.TextField(blank=True, null=True, help_text="Комментарий/решение модератора")
     
     def __str__(self):
         return f'Result for {self.content.file.name} - {self.content.safety_status}'

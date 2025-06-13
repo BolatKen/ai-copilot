@@ -12,4 +12,8 @@ urlpatterns = [
     
     path("unverified/", views.get_unverified_content),
     path("moderation/<int:result_id>/verify/", views.mark_as_verified),
+    path("moderation/<int:content_id>/update-tags/", views.update_moderation_tags),
+    path('moderation/finalize/<int:content_id>/', views.moderator_finalize_review)
+
+
 ]
