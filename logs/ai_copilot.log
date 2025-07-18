@@ -1,0 +1,29 @@
+INFO 2025-07-18 01:56:49,318 autoreload 46 124517711321984 Watching for file changes with StatReloader
+INFO 2025-07-18 01:57:18,448 autoreload 46 124517711321984 /app/copilot/views.py changed, reloading.
+INFO 2025-07-18 01:57:19,267 autoreload 48 133566135348096 Watching for file changes with StatReloader
+INFO 2025-07-18 01:57:36,551 autoreload 48 133566135348096 /app/copilot/views.py changed, reloading.
+INFO 2025-07-18 01:57:37,325 autoreload 50 135859240323968 Watching for file changes with StatReloader
+INFO 2025-07-18 01:57:53,633 autoreload 50 135859240323968 /app/copilot/views.py changed, reloading.
+INFO 2025-07-18 01:57:54,568 autoreload 52 135512440335232 Watching for file changes with StatReloader
+INFO 2025-07-18 01:58:10,845 autoreload 52 135512440335232 /app/copilot/views.py changed, reloading.
+INFO 2025-07-18 01:58:11,734 autoreload 54 129146025495424 Watching for file changes with StatReloader
+ERROR 2025-07-18 01:58:49,115 views 54 129145882748608 Error getting unverified content: no such table: copilot_moderationresult
+ERROR 2025-07-18 01:58:49,118 log 54 129145882748608 Internal Server Error: /copilot/unverified/
+ERROR 2025-07-18 01:58:49,119 basehttp 54 129145882748608 "GET /copilot/unverified/ HTTP/1.1" 500 96
+ERROR 2025-07-18 01:58:49,348 views 54 129145874355904 Error getting unverified content: no such table: copilot_moderationresult
+ERROR 2025-07-18 01:58:49,348 log 54 129145874355904 Internal Server Error: /copilot/unverified/
+ERROR 2025-07-18 01:58:49,349 basehttp 54 129145874355904 "GET /copilot/unverified/ HTTP/1.1" 500 96
+INFO 2025-07-18 01:58:56,973 autoreload 54 129146025495424 /app/copilot/admin.py changed, reloading.
+INFO 2025-07-18 01:58:58,150 autoreload 58 136662317828992 Watching for file changes with StatReloader
+INFO 2025-07-18 01:59:50,874 autoreload 58 136662317828992 /app/backend/settings.py changed, reloading.
+INFO 2025-07-18 01:59:51,931 autoreload 60 125044041214848 Watching for file changes with StatReloader
+INFO 2025-07-18 02:07:00,452 autoreload 60 125044041214848 /app/copilot/pagination.py changed, reloading.
+INFO 2025-07-18 02:07:01,610 autoreload 62 138466689026944 Watching for file changes with StatReloader
+INFO 2025-07-18 02:15:17,599 basehttp 62 138466612946624 "GET /copilot/health/ HTTP/1.1" 200 60
+INFO 2025-07-18 02:15:23,846 _client 62 138466612946624 HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO 2025-07-18 02:15:23,851 basehttp 62 138466612946624 "POST /copilot/ask/ HTTP/1.1" 200 93
+INFO 2025-07-18 02:16:01,028 _client 62 138466612946624 HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO 2025-07-18 02:16:01,030 basehttp 62 138466612946624 "POST /copilot/ask/ HTTP/1.1" 200 238
+ERROR 2025-07-18 02:16:07,969 views 62 138466612946624 Error getting unverified content: no such table: copilot_moderationresult
+ERROR 2025-07-18 02:16:07,971 log 62 138466612946624 Internal Server Error: /copilot/unverified/
+ERROR 2025-07-18 02:16:07,972 basehttp 62 138466612946624 "GET /copilot/unverified/ HTTP/1.1" 500 96

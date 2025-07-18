@@ -4,7 +4,20 @@ from copilot.models import Tag
 class Command(BaseCommand):
     help = 'Создает базовые теги для модерации контента'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--reset',
+            action='store_true',
+            help='Удалить все существующие теги перед созданием новых',
+        )
+
     def handle(self, *args, **options):
+        if options['reset']:
+            Tag.objects.all().delete()
+            self.stdout.write(
+                self.style.WARNING('Все существующие теги удалены')
+            )
+        
         dangerous_tags = [
             'pornography',
             'violence', 
@@ -20,7 +33,12 @@ class Command(BaseCommand):
             'gore',
             'terrorism',
             'nazi_symbols',
-            'racist_content'
+            'racist_content',
+            'sexual_content',
+            'disturbing_content',
+            'graphic_violence',
+            'suicide',
+            'abuse'
         ]
         
         created_count = 0
@@ -31,6 +49,8 @@ class Command(BaseCommand):
                 self.stdout.write(f'Создан тег: {tag_name}')
         
         self.stdout.write(
-            self.style.SUCCESS(f'Успешно создано {created_count} новых тегов')
+            self.style.SUCCESS(
+                f'Команда выполнена успешно! Создано {created_count} новых тегов из {len(dangerous_tags)} возможных.'
+            )
         )
 
