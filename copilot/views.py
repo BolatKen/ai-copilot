@@ -8,6 +8,24 @@ import openai
 
 client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
 
+class HealthCheckView(APIView):
+    """
+    Health check endpoint для проверки состояния сервиса
+    """
+    
+    @extend_schema(
+        responses={200: {"description": "Service is healthy"}},
+        tags=["Health"]
+    )
+    def get(self, request):
+        """
+        Проверка состояния сервиса
+        """
+        return Response({
+            "status": "healthy",
+            "message": "Service is running properly"
+        }, status=status.HTTP_200_OK)
+
 class AskView(APIView):
 
     @extend_schema(
