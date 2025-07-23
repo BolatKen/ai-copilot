@@ -181,13 +181,10 @@ LOGGING = {
             'style': '{',
         },
     },
+
+
+
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'ai_copilot.log',
-            'formatter': 'verbose',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -195,17 +192,17 @@ LOGGING = {
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['console'],
         'level': 'INFO',
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
         'copilot': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
@@ -214,3 +211,15 @@ LOGGING = {
 
 # Ensure logs directory exists
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)
+
+# Universal logging: console only in DEBUG, file+console in production
+if DEBUG:
+    root_handlers = ['console']
+    logger_handlers = ['console']
+else:
+    root_handlers = ['console', 'file']
+    logger_handlers = ['console', 'file']
+
+LOGGING['root']['handlers'] = root_handlers
+LOGGING['loggers']['django']['handlers'] = logger_handlers
+LOGGING['loggers']['copilot']['handlers'] = logger_handlers

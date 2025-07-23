@@ -22,19 +22,20 @@ COPY requirements.txt .
 # Установка Python зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода приложения
+
+# Создание пользователя и подготовка директорий/прав
+RUN adduser --disabled-password --gecos '' appuser \
+    && mkdir -p /app/media /app/logs /app/staticfiles \
+    && touch /app/logs/ai_copilot.log \
+    && chown -R appuser:appuser /app
+
+# Копирование кода приложения (после создания пользователя и директорий)
 COPY . .
 
-# Создание директорий для медиа и логов
-RUN mkdir -p media logs staticfiles
-
-# Создание пользователя для безопасности
-RUN adduser --disabled-password --gecos '' appuser && \
-    chown -R appuser:appuser /app
 USER appuser
 
 # Открытие порта
-EXPOSE 8000
+EXPOSE 8005
 
 # Команда запуска
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120", "backend.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8005", "--workers", "3", "--timeout", "120", "backend.wsgi:application"]

@@ -4,10 +4,10 @@ services:
   web:
     build: .
     ports:
-      - "8000:8000"
+      - "8005:8005"
     volumes:
-      - .:/app
+      - ./logs:/app/logs
     env_file:
       - .env
     command: >
-      python manage.py runserver 0.0.0.0:8000 --settings=backend.settings
+      python manage.py runserver 0.0.0.0:8005 --settings=backend.settings
