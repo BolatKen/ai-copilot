@@ -25,7 +25,7 @@ def analyze_image_with_ai(image_file):
         'graphic_violence', 'blood', 'disturbing_content'
     ]
     prompt = (
-        "Проанализируй это изображение на наличие опасного контента и пригодность для краудфандинговой платформы (например, Kickstarter). "
+        "Проанализируй это изображение на наличие опасного контента и пригодность для краудфандинговой платформы (например, Kickstarter). Не пиши в ответе каких тегов ты не нашел."
         f"Верни результат в формате JSON со следующими полями: "
         f"'verdict': safe/potentially_unsafe/unsafe, 'explanation': объяснение. "
         f"Опасные теги: {', '.join(dangerous_tags)}. "
