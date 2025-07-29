@@ -79,3 +79,5 @@ with open('image.jpg', 'rb') as f:
     r = requests.post('http://localhost:8005/copilot/moderate-image/', files=files)
     print(r.json())
 ```
+
+Yes, github actions works!!! ashshahahahahAHAHAH >:)))
