@@ -67,5 +67,4 @@ jobs:
           cd /home/bolat/ai-copilot
           git pull origin main
           docker compose down
-          docker compose build
-          docker compose up -d
+          docker compose up --build -d
