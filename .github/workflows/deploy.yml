@@ -61,11 +61,11 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
+        password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /path/to/your/project
+          cd ~/home/bolat/ai-copilot
           git pull origin main
-          docker-compose down
-          docker-compose build
-          docker-compose up -d
+          docker compose down
+          docker compose build
+          docker compose up -d
